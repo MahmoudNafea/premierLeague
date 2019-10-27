@@ -12,7 +12,14 @@
             <input placeholder="Enter your team name">
             <button>Search</button>
         </form>
-        <p>Created by {{name}}</p>
+        <div>
+            {{#each this}}
+            {{#if team_name}}
+
+            <p>Team: {{team_name}}</p>
+            {{/if}}
+            {{/each}}
+        </div>
     </div>
     <script src="/client/js/app.js"></script>
 </body>

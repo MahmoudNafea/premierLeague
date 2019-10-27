@@ -21,17 +21,23 @@ app.use(express.static(clientDirectoryPath))
 
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        name: "Nefo"
-    })
-})
 
-app.get('/table', (req, res) => {
     const url = `${BASE_URL}?action=get_standings&league_id=${LEAGUE_ID}&APIkey=${API_KEY}`
     request(url, (error, body) => {
         if (error) res.status(404).send()
-        res.send(JSON.parse(body.body))
+        res.render('index', {
+            team_name: JSON.parse(body.body)
+        })
     })
+
 })
+
+// app.get('/table', (req, res) => {
+//     const url = `${BASE_URL}?action=get_standings&league_id=${LEAGUE_ID}&APIkey=${API_KEY}`
+//     request(url, (error, body) => {
+//         if (error) res.status(404).send()
+//         res.send(JSON.parse(body.body))
+//     })
+// })
 
 app.listen(process.env.PORT || 3000)
